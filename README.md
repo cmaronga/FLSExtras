@@ -25,7 +25,7 @@ You can install the development version of FLSExtras from GitHub with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("ndorms-botnar/FLSExtras")
+devtools::install_github("cmaronga/FLSExtras")
 ```
 
 ## Example
