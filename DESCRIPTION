@@ -1,0 +1,20 @@
+Package: FLSExtras
+Title: Inputs & report generation for FLS model run
+Version: 0.0.1
+Authors@R: 
+    person("Christopher", "Maronga", , "marongachristopher@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-2374-7046"))
+Description: Preparing model inputs and generating summary reports for FLS model is a process. This package harmonizes
+             the process behind the scene using wrapper/helper functions.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+    dplyr,
+    googlesheets4,
+    here,
+    readr,
+    scales,
+    stringr,
+    tidyr
