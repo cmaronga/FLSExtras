@@ -22,16 +22,16 @@ Injectables_only <- function(df_sheet){
                "fls.trt.abaloparatide.spine.male",
                "fls.trt.romo.spine.male")
   # sumA
-  sum_a <- df_sheet %>%
-    filter(name %in% b69_b73) %>%
-    select(Value) %>% pull(Value) %>% as.numeric() %>% sum()
+  sum_a <- df_sheet |>
+    dplyr::filter(name %in% b69_b73) |>
+    dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric() |> sum()
   # actual change
   # 1. make check for the sum
 
   if (sum_a == 0){
-    df_sheet <- df_sheet %>%
-      mutate(across(Value, as.numeric)) %>%
-      mutate(
+    df_sheet <- df_sheet |>
+      dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+      dplyr::mutate(
         Value = replace(Value, which(name %in% b64_b68), 0),
         Source = replace(Source, which(name %in% b64_b68), "Not injectable, hence = 0"),
         Value = replace(Value, which(name == b69_b73[1]), 1), # denosumab gets a 1
@@ -39,12 +39,12 @@ Injectables_only <- function(df_sheet){
       )
 
   } else {
-    df_sheet <- df_sheet %>%
-      mutate(across(Value, as.numeric)) %>%
-      mutate(
+    df_sheet <- df_sheet |>
+      dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+      dplyr::mutate(
         Value = replace(Value, which(name %in% b64_b68), 0),
         Source = replace(Source, which(name %in% b64_b68), "Not injectable, hence = 0"),
-        Value = if_else(name %in% b69_b73, (Value/sum_a), Value)
+        Value = dplyr::if_else(name %in% b69_b73, (Value/sum_a), Value)
       )
 
   }
@@ -66,15 +66,15 @@ Injectables_only <- function(df_sheet){
                "fls.trt.romo.hip.male")
 
   # the actual sum
-  sum_b <- df_sheet %>%
-    filter(name %in% b91_b95) %>%
-    select(Value) %>% pull(Value) %>% as.numeric() %>% sum()
+  sum_b <- df_sheet |>
+    dplyr::filter(name %in% b91_b95) |>
+    dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric() |> sum()
 
   # The actual change conditional on the sum
   if (sum_b == 0){
-    df_sheet <- df_sheet %>%
-      mutate(across(Value, as.numeric)) %>%
-      mutate(
+    df_sheet <- df_sheet |>
+      dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+      dplyr::mutate(
         Value = replace(Value, which(name %in% b86_b90), 0),
         Source = replace(Source, which(name %in% b86_b90), "Not injectable, hence = 0"),
         Value = replace(Value, which(name == b91_b95[1]), 1), # denosumab gets a 1
@@ -82,12 +82,12 @@ Injectables_only <- function(df_sheet){
       )
 
   } else {
-    df_sheet <- df_sheet %>%
-      mutate(across(Value, as.numeric)) %>%
-      mutate(
+    df_sheet <- df_sheet |>
+      dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+      dplyr::mutate(
         Value = replace(Value, which(name %in% b86_b90), 0),
         Source = replace(Source, which(name %in% b86_b90), "Not injectable, hence = 0"),
-        Value = if_else(name %in% b91_b95, (Value/sum_b), Value)
+        Value = dplyr::if_else(name %in% b91_b95, (Value/sum_b), Value)
       )
   }
 
@@ -107,17 +107,17 @@ Injectables_only <- function(df_sheet){
                  "fls.trt.romo.other.male")
 
   # compute the sum(common denominator)
-  sum_c <- df_sheet %>%
-    filter(name %in% b113_b117) %>%
-    select(Value) %>% pull(Value) %>% as.numeric() %>% sum()
+  sum_c <- df_sheet |>
+    dplyr::filter(name %in% b113_b117) |>
+    dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric() |> sum()
 
 
 
   # The actual change conditional on the sum
   if (sum_c == 0){
-    df_sheet <- df_sheet %>%
-      mutate(across(Value, as.numeric)) %>%
-      mutate(
+    df_sheet <- df_sheet |>
+      dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+      dplyr::mutate(
         Value = replace(Value, which(name %in% b108_b112), 0),
         Source = replace(Source, which(name %in% b108_b112), "Not injectable, hence = 0"),
         Value = replace(Value, which(name == b113_b117[1]), 1), # denosumab gets a 1
@@ -125,12 +125,12 @@ Injectables_only <- function(df_sheet){
       )
 
   } else {
-    df_sheet <- df_sheet %>%
-      mutate(across(Value, as.numeric)) %>%
-      mutate(
+    df_sheet <- df_sheet |>
+      dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+      dplyr::mutate(
         Value = replace(Value, which(name %in% b108_b112), 0),
         Source = replace(Source, which(name %in% b108_b112), "Not injectable, hence = 0"),
-        Value = if_else(name %in% b113_b117, (Value/sum_c), Value)
+        Value = dplyr::if_else(name %in% b113_b117, (Value/sum_c), Value)
       )
   }
 
@@ -151,17 +151,17 @@ Injectables_only <- function(df_sheet){
                  "fls.trt.romo.spine.female")
 
   # compute the sum(common denominator)
-  sum_d <- df_sheet %>%
-    filter(name %in% b135_b139) %>%
-    select(Value) %>% pull(Value) %>% as.numeric() %>% sum()
+  sum_d <- df_sheet |>
+    dplyr::filter(name %in% b135_b139) |>
+    dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric() |> sum()
 
 
 
   # The actual change conditional on the sum
   if (sum_d == 0){
-    df_sheet <- df_sheet %>%
-      mutate(across(Value, as.numeric)) %>%
-      mutate(
+    df_sheet <- df_sheet |>
+      dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+      dplyr::mutate(
         Value = replace(Value, which(name %in% b130_b134), 0),
         Source = replace(Source, which(name %in% b130_b134), "Not injectable, hence = 0"),
         Value = replace(Value, which(name == b135_b139[1]), 1), # denosumab gets a 1
@@ -169,12 +169,12 @@ Injectables_only <- function(df_sheet){
       )
 
   } else {
-    df_sheet <- df_sheet %>%
-      mutate(across(Value, as.numeric)) %>%
-      mutate(
+    df_sheet <- df_sheet |>
+      dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+      dplyr::mutate(
         Value = replace(Value, which(name %in% b130_b134), 0),
         Source = replace(Source, which(name %in% b130_b134), "Not injectable, hence = 0"),
-        Value = if_else(name %in% b135_b139, (Value/sum_d), Value)
+        Value = dplyr::if_else(name %in% b135_b139, (Value/sum_d), Value)
       )
   }
 
@@ -195,17 +195,17 @@ Injectables_only <- function(df_sheet){
                  "fls.trt.romo.hip.female")
 
   # compute the sum(common denominator)
-  sum_e <- df_sheet %>%
-    filter(name %in% b157_b161) %>%
-    select(Value) %>% pull(Value) %>% as.numeric() %>% sum()
+  sum_e <- df_sheet |>
+    dplyr::filter(name %in% b157_b161) |>
+    dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric() |> sum()
 
 
 
   # The actual change conditional on the sum
   if (sum_e == 0){
-    df_sheet <- df_sheet %>%
-      mutate(across(Value, as.numeric)) %>%
-      mutate(
+    df_sheet <- df_sheet |>
+      dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+      dplyr::mutate(
         Value = replace(Value, which(name %in% b152_b156), 0),
         Source = replace(Source, which(name %in% b152_b156), "Not injectable, hence = 0"),
         Value = replace(Value, which(name == b157_b161[1]), 1), # denosumab gets a 1
@@ -213,12 +213,12 @@ Injectables_only <- function(df_sheet){
       )
 
   } else {
-    df_sheet <- df_sheet %>%
-      mutate(across(Value, as.numeric)) %>%
-      mutate(
+    df_sheet <- df_sheet |>
+      dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+      dplyr::mutate(
         Value = replace(Value, which(name %in% b152_b156), 0),
         Source = replace(Source, which(name %in% b152_b156), "Not injectable, hence = 0"),
-        Value = if_else(name %in% b157_b161, (Value/sum_e), Value)
+        Value = dplyr::if_else(name %in% b157_b161, (Value/sum_e), Value)
       )
   }
 
@@ -241,17 +241,17 @@ Injectables_only <- function(df_sheet){
                  "fls.trt.romo.other.female")
 
   # compute the sum(common denominator)
-  sum_f <- df_sheet %>%
-    filter(name %in% b179_b183) %>%
-    select(Value) %>% pull(Value) %>% as.numeric() %>% sum()
+  sum_f <- df_sheet |>
+    dplyr::filter(name %in% b179_b183) |>
+    dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric() |> sum()
 
 
 
   # The actual change conditional on the sum
   if (sum_f == 0){
-    df_sheet <- df_sheet %>%
-      mutate(across(Value, as.numeric)) %>%
-      mutate(
+    df_sheet <- df_sheet |>
+      dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+      dplyr::mutate(
         Value = replace(Value, which(name %in% b174_b178), 0),
         Source = replace(Source, which(name %in% b174_b178), "Not injectable, hence = 0"),
         Value = replace(Value, which(name == b179_b183[1]), 1), # denosumab gets a 1
@@ -259,21 +259,21 @@ Injectables_only <- function(df_sheet){
       )
 
   } else {
-    df_sheet <- df_sheet %>%
-      mutate(across(Value, as.numeric)) %>%
-      mutate(
+    df_sheet <- df_sheet |>
+      dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+      dplyr::mutate(
         Value = replace(Value, which(name %in% b174_b178), 0),
         Source = replace(Source, which(name %in% b174_b178), "Not injectable, hence = 0"),
-        Value = if_else(name %in% b179_b183, (Value/sum_f), Value)
+        Value = dplyr::if_else(name %in% b179_b183, (Value/sum_f), Value)
       )
   }
 
   # scenario set G:
   # check the value of b201
 
-  b201 <- df_sheet %>%
-    filter(name == "romo.to.nothing.fls.male")%>%
-    select(Value) %>% pull(Value) %>% as.numeric()
+  b201 <- df_sheet |>
+    dplyr::filter(name == "romo.to.nothing.fls.male")|>
+    dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric()
 
   # rows that get replaced with zero
   b202_b206 <- c("romo.to.alendronate.fls.male",
@@ -290,15 +290,15 @@ Injectables_only <- function(df_sheet){
   if (b201 < 1){
 
     # compute common denominator
-    sum_g <- df_sheet %>%
-      filter(name %in% b207_b208) %>%
-      select(Value) %>% pull(Value) %>% as.numeric() %>% sum()
+    sum_g <- df_sheet |>
+      dplyr::filter(name %in% b207_b208) |>
+      dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric() |> sum()
 
     # The actual change conditional on the sum
     if (sum_g == 0){
-      df_sheet <- df_sheet %>%
-        mutate(across(Value, as.numeric)) %>%
-        mutate(
+      df_sheet <- df_sheet |>
+        dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+        dplyr::mutate(
           Value = replace(Value, which(name %in% b202_b206), 0),
           Source = replace(Source, which(name %in% b202_b206), "Not injectable, hence = 0"),
           Value = replace(Value, which(name == b207_b208[1]), 1), # denosumab gets a 1
@@ -306,12 +306,12 @@ Injectables_only <- function(df_sheet){
         )
 
     } else {
-      df_sheet <- df_sheet %>%
-        mutate(across(Value, as.numeric)) %>%
-        mutate(
+      df_sheet <- df_sheet |>
+        dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+        dplyr::mutate(
           Value = replace(Value, which(name %in% b202_b206), 0),
           Source = replace(Source, which(name %in% b202_b206), "Not injectable, hence = 0"),
-          Value = if_else(name %in% b207_b208, (Value/sum_g), Value)
+          Value = dplyr::if_else(name %in% b207_b208, (Value/sum_g), Value)
         )
     }
 
@@ -323,9 +323,9 @@ Injectables_only <- function(df_sheet){
   # scenario set H:
   # check the value of b209
 
-  b209 <- df_sheet %>%
-    filter(name == "romo.to.nothing.fls.female")%>%
-    select(Value) %>% pull(Value) %>% as.numeric()
+  b209 <- df_sheet |>
+    dplyr::filter(name == "romo.to.nothing.fls.female")|>
+    dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric()
 
   # rows that get replaced with zero
   b210_b214 <- c("romo.to.alendronate.fls.female",
@@ -342,15 +342,15 @@ Injectables_only <- function(df_sheet){
   if (b209 < 1){
 
     # compute common denominator
-    sum_h <- df_sheet %>%
-      filter(name %in% b215_b216) %>%
-      select(Value) %>% pull(Value) %>% as.numeric() %>% sum()
+    sum_h <- df_sheet |>
+      dplyr::filter(name %in% b215_b216) |>
+      dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric() |> sum()
 
     # The actual change conditional on the sum
     if (sum_h == 0){
-      df_sheet <- df_sheet %>%
-        mutate(across(Value, as.numeric)) %>%
-        mutate(
+      df_sheet <- df_sheet |>
+        dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+        dplyr::mutate(
           Value = replace(Value, which(name %in% b210_b214), 0),
           Source = replace(Source, which(name %in% b210_b214), "Not injectable, hence = 0"),
           Value = replace(Value, which(name == b215_b216[1]), 1), # denosumab gets a 1
@@ -358,12 +358,12 @@ Injectables_only <- function(df_sheet){
         )
 
     } else {
-      df_sheet <- df_sheet %>%
-        mutate(across(Value, as.numeric)) %>%
-        mutate(
+      df_sheet <- df_sheet |>
+        dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+        dplyr::mutate(
           Value = replace(Value, which(name %in% b210_b214), 0),
           Source = replace(Source, which(name %in% b210_b214), "Not injectable, hence = 0"),
-          Value = if_else(name %in% b215_b216, (Value/sum_h), Value)
+          Value = dplyr::if_else(name %in% b215_b216, (Value/sum_h), Value)
         )
     }
 
@@ -375,9 +375,9 @@ Injectables_only <- function(df_sheet){
   # scenario set I:
   # check the value of b234
 
-  b234 <- df_sheet %>%
-    filter(name == "abaloparatide.to.nothing.fls.male")%>%
-    select(Value) %>% pull(Value) %>% as.numeric()
+  b234 <- df_sheet |>
+    dplyr::filter(name == "abaloparatide.to.nothing.fls.male")|>
+    dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric()
 
   # rows that get replaced with zero
   b235_b239 <- c("abaloparatide.to.alendronate.fls.male",
@@ -394,15 +394,15 @@ Injectables_only <- function(df_sheet){
   if (b234 < 1){
 
     # compute common denominator
-    sum_i <- df_sheet %>%
-      filter(name %in% b240_b241) %>%
-      select(Value) %>% pull(Value) %>% as.numeric() %>% sum()
+    sum_i <- df_sheet |>
+      dplyr::filter(name %in% b240_b241) |>
+      dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric() |> sum()
 
     # The actual change conditional on the sum
     if (sum_i == 0){
-      df_sheet <- df_sheet %>%
-        mutate(across(Value, as.numeric)) %>%
-        mutate(
+      df_sheet <- df_sheet |>
+        dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+        dplyr::mutate(
           Value = replace(Value, which(name %in% b235_b239), 0),
           Source = replace(Source, which(name %in% b235_b239), "Not injectable, hence = 0"),
           Value = replace(Value, which(name == b240_b241[1]), 1), # denosumab gets a 1
@@ -410,12 +410,12 @@ Injectables_only <- function(df_sheet){
         )
 
     } else {
-      df_sheet <- df_sheet %>%
-        mutate(across(Value, as.numeric)) %>%
-        mutate(
+      df_sheet <- df_sheet |>
+        dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+        dplyr::mutate(
           Value = replace(Value, which(name %in% b235_b239), 0),
           Source = replace(Source, which(name %in% b235_b239), "Not injectable, hence = 0"),
-          Value = if_else(name %in% b240_b241, (Value/sum_i), Value)
+          Value = dplyr::if_else(name %in% b240_b241, (Value/sum_i), Value)
         )
     }
 
@@ -428,9 +428,9 @@ Injectables_only <- function(df_sheet){
   # scenario set J:
   # check the value of b242
 
-  b242 <- df_sheet %>%
-    filter(name == "abaloparatide.to.nothing.fls.female")%>%
-    select(Value) %>% pull(Value) %>% as.numeric()
+  b242 <- df_sheet |>
+    dplyr::filter(name == "abaloparatide.to.nothing.fls.female")|>
+    dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric()
 
   # rows that get replaced with zero
   b243_b247 <- c("abaloparatide.to.alendronate.fls.female",
@@ -447,15 +447,15 @@ Injectables_only <- function(df_sheet){
   if (b242 < 1){
 
     # compute common denominator
-    sum_j <- df_sheet %>%
-      filter(name %in% b248_b249) %>%
-      select(Value) %>% pull(Value) %>% as.numeric() %>% sum()
+    sum_j <- df_sheet |>
+      dplyr::filter(name %in% b248_b249) |>
+      dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric() |> sum()
 
     # The actual change conditional on the sum
     if (sum_j == 0){
-      df_sheet <- df_sheet %>%
-        mutate(across(Value, as.numeric)) %>%
-        mutate(
+      df_sheet <- df_sheet |>
+        dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+        dplyr::mutate(
           Value = replace(Value, which(name %in% b243_b247), 0),
           Source = replace(Source, which(name %in% b243_b247), "Not injectable, hence = 0"),
           Value = replace(Value, which(name == b248_b249[1]), 1), # denosumab gets a 1
@@ -463,12 +463,12 @@ Injectables_only <- function(df_sheet){
         )
 
     } else {
-      df_sheet <- df_sheet %>%
-        mutate(across(Value, as.numeric)) %>%
-        mutate(
+      df_sheet <- df_sheet |>
+        dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+        dplyr::mutate(
           Value = replace(Value, which(name %in% b243_b247), 0),
           Source = replace(Source, which(name %in% b243_b247), "Not injectable, hence = 0"),
-          Value = if_else(name %in% b248_b249, (Value/sum_j), Value)
+          Value = dplyr::if_else(name %in% b248_b249, (Value/sum_j), Value)
         )
     }
 
@@ -479,9 +479,9 @@ Injectables_only <- function(df_sheet){
   # scenario set K:
   # check the value of b267
 
-  b267 <- df_sheet %>%
-    filter(name == "teriparatide.to.nothing.fls.male")%>%
-    select(Value) %>% pull(Value) %>% as.numeric()
+  b267 <- df_sheet |>
+    dplyr::filter(name == "teriparatide.to.nothing.fls.male")|>
+    dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric()
 
   # rows that get replaced with zero
   b268_b272 <- c("teriparatide.to.alendronate.fls.male",
@@ -498,15 +498,15 @@ Injectables_only <- function(df_sheet){
   if (b267 < 1){
 
     # compute common denominator
-    sum_k <- df_sheet %>%
-      filter(name %in% b273_b274) %>%
-      select(Value) %>% pull(Value) %>% as.numeric() %>% sum()
+    sum_k <- df_sheet |>
+      dplyr::filter(name %in% b273_b274) |>
+      dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric() |> sum()
 
     # The actual change conditional on the sum
     if (sum_k == 0){
-      df_sheet <- df_sheet %>%
-        mutate(across(Value, as.numeric)) %>%
-        mutate(
+      df_sheet <- df_sheet |>
+        dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+        dplyr::mutate(
           Value = replace(Value, which(name %in% b268_b272), 0),
           Source = replace(Source, which(name %in% b268_b272), "Not injectable, hence = 0"),
           Value = replace(Value, which(name == b273_b274[1]), 1), # denosumab gets a 1
@@ -514,12 +514,12 @@ Injectables_only <- function(df_sheet){
         )
 
     } else {
-      df_sheet <- df_sheet %>%
-        mutate(across(Value, as.numeric)) %>%
-        mutate(
+      df_sheet <- df_sheet |>
+        dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+        dplyr::mutate(
           Value = replace(Value, which(name %in% b268_b272), 0),
           Source = replace(Source, which(name %in% b268_b272), "Not injectable, hence = 0"),
-          Value = if_else(name %in% b273_b274, (Value/sum_k), Value)
+          Value = dplyr::if_else(name %in% b273_b274, (Value/sum_k), Value)
         )
     }
 
@@ -530,9 +530,9 @@ Injectables_only <- function(df_sheet){
   # scenario set L:
   # check the value of b275
 
-  b275 <- df_sheet %>%
-    filter(name == "teriparatide.to.nothing.fls.female")%>%
-    select(Value) %>% pull(Value) %>% as.numeric()
+  b275 <- df_sheet |>
+    dplyr::filter(name == "teriparatide.to.nothing.fls.female")|>
+    dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric()
 
   # rows that get replaced with zero
   b276_b280 <- c("teriparatide.to.alendronate.fls.female",
@@ -549,15 +549,15 @@ Injectables_only <- function(df_sheet){
   if (b275 < 1){
 
     # compute common denominator
-    sum_l <- df_sheet %>%
-      filter(name %in% b281_b28) %>%
-      select(Value) %>% pull(Value) %>% as.numeric() %>% sum()
+    sum_l <- df_sheet |>
+      dplyr::filter(name %in% b281_b28) |>
+      dplyr::select(Value) |> dplyr::pull(Value) |> as.numeric() |> sum()
 
     # The actual change conditional on the sum
     if (sum_l == 0){
-      df_sheet <- df_sheet %>%
-        mutate(across(Value, as.numeric)) %>%
-        mutate(
+      df_sheet <- df_sheet |>
+        dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+        dplyr::mutate(
           Value = replace(Value, which(name %in% b276_b280), 0),
           Source = replace(Source, which(name %in% b276_b280), "Not injectable, hence = 0"),
           Value = replace(Value, which(name == b281_b28[1]), 1), # denosumab gets a 1
@@ -565,12 +565,12 @@ Injectables_only <- function(df_sheet){
         )
 
     } else {
-      df_sheet <- df_sheet %>%
-        mutate(across(Value, as.numeric)) %>%
-        mutate(
+      df_sheet <- df_sheet |>
+        dplyr::mutate(dplyr::across(Value, as.numeric)) |>
+        dplyr::mutate(
           Value = replace(Value, which(name %in% b276_b280), 0),
           Source = replace(Source, which(name %in% b276_b280), "Not injectable, hence = 0"),
-          Value = if_else(name %in% b281_b28, (Value/sum_l), Value)
+          Value = dplyr::if_else(name %in% b281_b28, (Value/sum_l), Value)
         )
     }
 
@@ -579,9 +579,9 @@ Injectables_only <- function(df_sheet){
   }
 
   # round values to 3 decimal place and convert back to character
-  df_sheet <- df_sheet %>%
-    # mutate(across(Value, ~round(., 4))) %>%
-    mutate(across(Value, ~as.character(.)))
+  df_sheet <- df_sheet |>
+    # mutate(across(Value, ~round(., 4))) |>
+    dplyr::mutate(dplyr::across(Value, ~as.character(.)))
 
 
 }
