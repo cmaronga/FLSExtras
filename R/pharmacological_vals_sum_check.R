@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-pharmacological_vals.sum.check <- function(df_sheet, base_vars = NULL,
+pharmacological_vals_sum_check <- function(df_sheet, base_vars = NULL,
   gender = NULL,
   site = NULL,
   arm = NULL){
